@@ -1,0 +1,14 @@
+<a [href]="'https://smartsave.atlassian.net/browse/' + ticket.ticket" target="_blank"
+  [class]="'card card-small ' + ticket.status"
+  [matTooltip]="ticket.description">
+  <ng-container [ngSwitch]="ticket.status">
+    <mat-icon *ngSwitchCase="'success'">done</mat-icon>
+    <mat-icon *ngSwitchCase="'info'">label</mat-icon>
+    <mat-icon *ngSwitchCase="'warning'">alarm</mat-icon>
+  </ng-container>
+  <span>{{ticket.ticket}}</span>
+  <ng-container [ngSwitch]="ticket.type">
+    <mat-icon *ngSwitchCase="'mobilebug'" class="type">perm_device_information</mat-icon>
+    <mat-icon *ngSwitchCase="'bug'" class="type">bug_report</mat-icon>
+  </ng-container>
+</a>

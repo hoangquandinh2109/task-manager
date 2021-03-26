@@ -1,4 +1,174 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  padding-top: 60px;
+}
+
+.toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: #1976d2;
+  color: white;
+  font-weight: 600;
+  padding: 0 40px;
+  z-index: 1;
+}
+.content {
+  display: flex;
+  margin: 82px auto 32px;
+  padding: 0 16px;
+  max-width: 960px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  svg.material-icons {
+    path {
+      fill: #888;
+    }
+  }
+  border-radius: 4px;
+  border: 1px solid #eee;
+  background-color: #fafafa;
+  height: 40px;
+  width: 200px;
+  margin: 0 8px 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+  line-height: 24px;
+  color: black;
+  text-decoration: none;
+  &.danger {
+    background-color: #f85454;
+  }
+  &.warning {
+    background-color: #f1fc6f;
+  }
+  &.success {
+    background-color: #b4ff9e;
+  }
+  &.info {
+    background-color: #b1c6ee;
+  }
+}
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 16px;
+  .card {
+    &:not(:last-child) {
+      margin-right: 0;
+    }
+    &:not(.highlight-card) {
+      cursor: pointer;
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+        .material-icons {
+          path {
+            fill: rgb(105, 103, 103);
+          }
+        }
+      }
+    }
+  }
+}
+.card.card-small {
+  height: 16px;
+  width: 168px;
+}
+.card.highlight-card {
+  background-color: #1976d2;
+  color: white;
+  font-weight: 600;
+  border: none;
+  width: auto;
+  min-width: 30%;
+  position: relative;
+}
+.card.card.highlight-card {
+  span {
+    margin-left: 60px;
+  }
+}
+
+.type.mat-icon{
+  opacity: 0.1;
+}
+
+.terminal {
+  position: fixed;
+  bottom: 0;
+	width: 100%;
+	padding-top: 45px;
+	overflow: hidden;
+	background-color: rgb(15, 15, 16);
+  &.close{
+    padding-top: 32px;
+  }
+	.buttons {
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: rgb(58, 58, 58);
+		color: #c2c3c4;
+		width: 100%;
+		line-height: 0;
+		padding: 5px 0;
+		text-indent: 4px;
+    span {
+      cursor: pointer;
+      &.resizing{
+        float: right;
+        margin-right: 5px;
+      }
+    }
+	}
+	pre {
+		font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+		color: white;
+		padding: 0 1rem 1rem;
+		margin: 0;
+    outline: none;
+    max-height: 200px;
+    overflow: auto;
+	}
+}
+
+@media screen and (max-width: 767px) {
+  .card-container > *:not(.circle-link),
+  .terminal {
+    width: 100%;
+  }
+
+  .card:not(.highlight-card) {
+    height: 16px;
+    margin: 8px 0;
+  }
+
+  .card.highlight-card span {
+    margin-left: 72px;
+  }
+
+  svg#rocket-smoke {
+    right: 120px;
+    transform: rotate(-5deg);
+  }
+}

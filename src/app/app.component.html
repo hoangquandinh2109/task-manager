@@ -1,0 +1,28 @@
+<div class="toolbar" role="banner">
+  <img
+    width="40"
+    alt="Manager Logo"
+    src="https://cdn0.iconfinder.com/data/icons/business-office-and-people-in-flat/256/Businessman-2-512.png"
+  />
+  <span>Task</span>
+</div>
+<div>
+  <div class="content" [style.paddingBottom.px]="terminal.offsetHeight">
+    <div class="card-container">
+      <ng-container *ngFor="let ticket of ticketsList">
+        <app-ticket [ticket]="ticket"></app-ticket>
+      </ng-container>
+    </div>
+  </div>
+  <div class="terminal" [class.close]="terminalClose" #terminal>
+    <div class="buttons">
+      <span class="material-icons resizing"
+        (click)="terminalClose = !terminalClose"
+        [title]="terminalClose ? 'expand' : 'minimize'">{{
+          terminalClose ? 'add_circle_outline' : 'remove_circle_outline'}}
+      </span>
+      <span class="material-icons">done</span>
+    </div>
+    <pre [hidden]="terminalClose" contenteditable>ng generate component xyz</pre>
+  </div>
+</div>

@@ -4,15 +4,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ThemeModule } from './shared/theme/theme.module';
+import { HttpClientModule } from '@angular/common/http';
+import { TicketComponent } from './components/ticket/ticket.component';
+
+const COMPONENTS = [
+  AppComponent,
+  TicketComponent
+]
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [...COMPONENTS],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ThemeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
