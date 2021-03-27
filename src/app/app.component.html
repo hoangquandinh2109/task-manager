@@ -10,7 +10,7 @@
   <div class="content" [style.paddingBottom.px]="terminal.offsetHeight">
     <div class="card-container">
       <ng-container *ngFor="let ticket of ticketsList">
-        <app-ticket [ticket]="ticket" (contextmenu)="contextMenu($event)"></app-ticket>
+        <app-ticket [ticket]="ticket"></app-ticket>
       </ng-container>
     </div>
   </div>
@@ -26,12 +26,4 @@
     <pre #inputContentRef (paste)="pasteHandler($event)" contenteditable></pre>
   </div>
 </div>
-<div *ngIf="openContextMenu" class="card-container context-menu"
-  [style.top.px]="contextMenuPosition.y"
-  [style.left.px]="contextMenuPosition.x">
-  <div class="card card-small"><span>To do</span></div>
-  <div class="card card-small info"><span>Inprogress</span></div>
-  <div class="card card-small warning"><span>Pending</span></div>
-  <div class="card card-small success"><span>Done</span></div>
-  <div class="card card-small danger"><span>Highlight</span></div>
-</div>
+<app-context-menu></app-context-menu>

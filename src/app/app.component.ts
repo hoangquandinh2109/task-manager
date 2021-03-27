@@ -7,34 +7,37 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ContextMenuComponent } from './components/context-menu/context-menu.component';
 import { TicketService } from './services/ticket.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  providers: [ContextMenuComponent]
 })
 export class AppComponent implements OnInit, OnDestroy {
   public ticketsList: any[] = [];
   public terminalClose = true;
-  public openContextMenu = false;
-  public contextMenuPosition = {x: 0, y: 0};
-  @ViewChild('inputContentRef') inputContentRef: ElementRef<HTMLPreElement>;
+  @ViewChild('inputContentRef')
+  public inputContentRef: ElementRef<HTMLPreElement>;
+  @ViewChild(ContextMenuComponent)
+  public contextMenu: ContextMenuComponent;
 
   private ticketsList$: any[] = [];
   private destroy$: Subject<any> = new Subject();
-  constructor(private ticketSvc: TicketService, elementRef: ElementRef) {
+  constructor(
+    private ticketSvc: TicketService,
+    elementRef: ElementRef,
+    contextMenu: ContextMenuComponent
+    ) {
     this.inputContentRef = elementRef;
+    this.contextMenu = contextMenu;
   }
 
   public ngOnInit(): void {
     this.getTicket();
     document.addEventListener('keydown', this.keyDownHandler.bind(this));
-    document.addEventListener('click', (e: any) => {
-      if (!e.path.filter((x: any) => x.className?.includes('context-menu')).length) {
-        this.openContextMenu = false;
-      }
-    });
   }
 
   public ngOnDestroy(): void {
@@ -55,15 +58,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.filtTicket(todoList);
     this.inputContentRef.nativeElement.innerText = '';
     this.toggleTerminal(true);
-  }
-
-  public contextMenu(e: any): void{
-    e.preventDefault();
-    const isTooLow = innerHeight - e.clientY < 346;
-    const isTooOnTheRight = innerWidth - e.clientX < 200;
-    this.contextMenuPosition.x = isTooOnTheRight ? innerWidth - 220 : e.clientX;
-    this.contextMenuPosition.y = isTooLow ? e.clientY - 346 > 0 ? e.clientY - 346 : 0 : e.clientY;
-    this.openContextMenu = true;
   }
 
   public toggleTerminal(value?: boolean): void{
@@ -99,7 +93,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private keyDownHandler(e: KeyboardEvent): void {
     switch (e.key) {
       case 'Escape':
-        this.openContextMenu = false;
+        this.contextMenu.contextMenuIsOpen = false;
         break;
       case 't':
         if (document.activeElement !== this.inputContentRef.nativeElement) {

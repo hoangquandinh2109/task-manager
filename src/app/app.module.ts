@@ -8,10 +8,12 @@ import { ThemeModule } from './shared/theme/theme.module';
 import { HttpClientModule } from '@angular/common/http';
 import { TicketComponent } from './components/ticket/ticket.component';
 import { CommonModule } from '@angular/common';
+import { ContextMenuComponent } from './components/context-menu/context-menu.component';
 
 const COMPONENTS = [
   AppComponent,
-  TicketComponent
+  TicketComponent,
+  ContextMenuComponent
 ];
 
 @NgModule({

@@ -1,0 +1,9 @@
+<div *ngIf="contextMenuIsOpen" class="card-container context-menu"
+  [style.top.px]="contextMenuPosition.y"
+  [style.left.px]="contextMenuPosition.x">
+  <div class="card card-small" (click)="markTodo()"><span>To do</span></div>
+  <div class="card card-small info" (click)="markInProgress()"><span>Inprogress</span></div>
+  <div class="card card-small warning" (click)="markAsPending()"><span>Pending</span></div>
+  <div class="card card-small success" (click)="markDone()"><span>Done</span></div>
+  <div class="card card-small danger" (click)="highlight()"><span>Highlight</span></div>
+</div>
