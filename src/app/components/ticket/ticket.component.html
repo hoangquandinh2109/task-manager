@@ -1,7 +1,10 @@
 <a *ngIf="ticket._id" [href]="'https://smartsave.atlassian.net/browse/' + ticket.ticket" target="_blank"
   [class]="'card card-small ' + ticket.status"
   [matTooltip]="ticket.description"
-  (contextmenu)="contextMenuHandler($event)">
+  (contextmenu)="contextMenuHandler($event)"
+  (touchstart)="touchStart($event)"
+  (touchmove)="touchMove()"
+  (touchend)="touchEnd()">
   <ng-container [ngSwitch]="ticket.status">
     <mat-icon *ngSwitchCase="'success'">done</mat-icon>
     <mat-icon *ngSwitchCase="'info'">label</mat-icon>

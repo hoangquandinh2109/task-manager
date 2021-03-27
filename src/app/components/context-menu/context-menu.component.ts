@@ -36,7 +36,12 @@ export class ContextMenuComponent implements OnInit {
 
   public ngOnInit(): void {
     document.addEventListener('click', (e: any) => {
-      if (!e.path.filter((x: any) => x.className?.includes('context-menu')).length) {
+      if (!e.composedPath().filter((x: any) => x.className?.includes('context-menu')).length) {
+        this.contextMenuIsOpen = false;
+      }
+    });
+    document.addEventListener('touchstart', (e: any) => {
+      if (!e.composedPath().filter((x: any) => x.className?.includes('context-menu')).length) {
         this.contextMenuIsOpen = false;
       }
     });
@@ -44,10 +49,11 @@ export class ContextMenuComponent implements OnInit {
 
   public openContextMenu(e: any): void{
     e.preventDefault();
-    const isTooLow = innerHeight - e.clientY < 346;
-    const isTooOnTheRight = innerWidth - e.clientX < 220;
-    this.contextMenuPosition.x = isTooOnTheRight ? innerWidth - 220 : e.clientX;
-    this.contextMenuPosition.y = isTooLow ? e.clientY - 346 > 0 ? e.clientY - 346 : 0 : e.clientY;
+    const { clientX, clientY } = e.touches ? e.touches[0] : e;
+    const isTooLow = innerHeight - clientY < 346;
+    const isTooOnTheRight = innerWidth - clientX < 220;
+    this.contextMenuPosition.x = isTooOnTheRight ? innerWidth - 220 : clientX;
+    this.contextMenuPosition.y = isTooLow ? clientY - 346 > 0 ? clientY - 346 : 0 : clientY;
     this.contextMenuIsOpen = true;
     this.markTodo = new ContextMenuButton(this);
     this.markInProgress = new ContextMenuButton(this);

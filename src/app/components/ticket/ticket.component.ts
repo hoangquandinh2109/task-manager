@@ -12,6 +12,8 @@ import { TicketInfoDialogComponent } from './ticket-info-dialog/ticket-info-dial
 export class TicketComponent implements OnInit {
   @Input()
   public ticket: any;
+  private timerLongTouch: any;
+  private isLongTouch = false;
   constructor(
     private app: AppComponent,
     private ticketSvc: TicketService,
@@ -52,6 +54,24 @@ export class TicketComponent implements OnInit {
         });
       }
     });
+  }
+
+  public touchStart(e: TouchEvent) {
+    e.preventDefault();
+    this.isLongTouch = false;
+    this.timerLongTouch = setTimeout(() => {
+      this.isLongTouch = true;
+      this.contextMenuHandler(e);
+  }, 500);
+  }
+  public touchMove() {
+    clearTimeout(this.timerLongTouch);
+  }
+  public touchEnd() {
+    clearTimeout(this.timerLongTouch);
+    if (!this.isLongTouch) {
+      window.location.href = `https://smartsave.atlassian.net/browse/${this.ticket.ticket}`;
+    }
   }
 
   private updateTicket(status: string) {
