@@ -122,6 +122,10 @@ body {
 	background-color: rgb(15, 15, 16);
   &.close{
     padding-top: 32px;
+    pre {
+      height: 0;
+      padding: 0;
+    }
   }
 	.buttons {
 		position: absolute;
@@ -150,6 +154,23 @@ body {
     max-height: 200px;
     overflow: auto;
 	}
+}
+
+.context-menu{
+  position: fixed;
+  width: 200px;
+  background: white;
+  box-shadow: 3px 5px 3px #00000036;
+  z-index: 2;
+  &.card-container{
+    margin-top: 0;
+    .card{
+      margin: 0 8px 16px;
+      &:first-child{
+        margin-top: 16px;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 767px) {

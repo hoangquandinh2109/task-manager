@@ -7,16 +7,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ThemeModule } from './shared/theme/theme.module';
 import { HttpClientModule } from '@angular/common/http';
 import { TicketComponent } from './components/ticket/ticket.component';
+import { CommonModule } from '@angular/common';
 
 const COMPONENTS = [
   AppComponent,
   TicketComponent
-]
+];
 
 @NgModule({
   declarations: [...COMPONENTS],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,

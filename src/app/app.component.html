@@ -10,19 +10,28 @@
   <div class="content" [style.paddingBottom.px]="terminal.offsetHeight">
     <div class="card-container">
       <ng-container *ngFor="let ticket of ticketsList">
-        <app-ticket [ticket]="ticket"></app-ticket>
+        <app-ticket [ticket]="ticket" (contextmenu)="contextMenu($event)"></app-ticket>
       </ng-container>
     </div>
   </div>
   <div class="terminal" [class.close]="terminalClose" #terminal>
     <div class="buttons">
       <span class="material-icons resizing"
-        (click)="terminalClose = !terminalClose"
+        (click)="toggleTerminal()"
         [title]="terminalClose ? 'expand' : 'minimize'">{{
           terminalClose ? 'add_circle_outline' : 'remove_circle_outline'}}
       </span>
-      <span class="material-icons">done</span>
+      <span (click)="applyContent()" class="material-icons">done</span>
     </div>
-    <pre [hidden]="terminalClose" contenteditable>ng generate component xyz</pre>
+    <pre #inputContentRef (paste)="pasteHandler($event)" contenteditable></pre>
   </div>
+</div>
+<div *ngIf="openContextMenu" class="card-container context-menu"
+  [style.top.px]="contextMenuPosition.y"
+  [style.left.px]="contextMenuPosition.x">
+  <div class="card card-small"><span>To do</span></div>
+  <div class="card card-small info"><span>Inprogress</span></div>
+  <div class="card card-small warning"><span>Pending</span></div>
+  <div class="card card-small success"><span>Done</span></div>
+  <div class="card card-small danger"><span>Highlight</span></div>
 </div>

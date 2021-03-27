@@ -6,9 +6,11 @@
     <mat-icon *ngSwitchCase="'info'">label</mat-icon>
     <mat-icon *ngSwitchCase="'warning'">alarm</mat-icon>
   </ng-container>
+  <mat-icon *ngIf="!ticket._id">add</mat-icon>
   <span>{{ticket.ticket}}</span>
   <ng-container [ngSwitch]="ticket.type">
     <mat-icon *ngSwitchCase="'mobilebug'" class="type">perm_device_information</mat-icon>
     <mat-icon *ngSwitchCase="'bug'" class="type">bug_report</mat-icon>
+    <ng-container *ngSwitchDefault></ng-container>
   </ng-container>
 </a>
