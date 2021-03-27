@@ -55,6 +55,7 @@ export class AppComponent implements OnInit, OnDestroy {
     const text: any = this.inputContentRef.nativeElement.innerText;
     const regex = /SSWA-\d{1,}/g;
     const todoList = [...text.matchAll(regex)].map((m) => m[0]);
+    todoList.length ? localStorage.setItem('todoList', JSON.stringify(todoList)) : localStorage.removeItem('todoList');
     this.filtTicket(todoList);
     this.inputContentRef.nativeElement.innerText = '';
     this.toggleTerminal(true);
@@ -75,7 +76,12 @@ export class AppComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((resp) => {
         this.ticketsList$ = resp;
-        this.filtTicket();
+        const todoList = localStorage.getItem('todoList');
+        if (todoList){
+          this.filtTicket(JSON.parse(todoList));
+        } else {
+          this.filtTicket();
+        }
       });
   }
 
@@ -96,7 +102,8 @@ export class AppComponent implements OnInit, OnDestroy {
         this.contextMenu.contextMenuIsOpen = false;
         break;
       case 't':
-        if (document.activeElement !== this.inputContentRef.nativeElement) {
+        if (document.activeElement !== this.inputContentRef.nativeElement &&
+          document.activeElement?.tagName !== 'INPUT') {
           e.preventDefault();
           this.toggleTerminal();
         }

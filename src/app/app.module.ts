@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { TicketComponent } from './components/ticket/ticket.component';
 import { CommonModule } from '@angular/common';
 import { ContextMenuComponent } from './components/context-menu/context-menu.component';
+import { TicketInfoDialogComponent } from './components/ticket/ticket-info-dialog/ticket-info-dialog.component';
+import { FormsModule } from '@angular/forms';
 
 const COMPONENTS = [
   AppComponent,
@@ -16,11 +18,17 @@ const COMPONENTS = [
   ContextMenuComponent
 ];
 
+const ENTRYCOMPONENTS = [
+  TicketInfoDialogComponent
+];
+
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS, ...ENTRYCOMPONENTS],
+  entryComponents: [...ENTRYCOMPONENTS],
   imports: [
     BrowserModule,
     CommonModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,

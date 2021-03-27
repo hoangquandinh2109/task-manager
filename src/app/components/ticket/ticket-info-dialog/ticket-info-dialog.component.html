@@ -1,0 +1,33 @@
+<form #form>
+  <div mat-dialog-content>
+    <p>Do you want to add more detail?</p>
+    <mat-form-field *ngIf="data.status !== undefined">
+      <mat-label>Status</mat-label>
+      <mat-select [(value)]="data.status">
+        <mat-option value="">Todo</mat-option>
+        <mat-option value="info">In progress</mat-option>
+        <mat-option value="warning">Pending</mat-option>
+        <mat-option value="success">Done</mat-option>
+        <mat-option value="danger">Highlight</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input required matInput [(ngModel)]="data.description" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Type</mat-label>
+      <mat-select [(value)]="data.type">
+        <mat-option value="mobilebug">Mobile bug</mat-option>
+        <mat-option value="bug">Bug</mat-option>
+        <mat-option value="story">Story</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="{}">No Thanks</button>
+    <button [disabled]="form.invalid" type="submit" mat-button [mat-dialog-close]="data" cdkFocusInitial>
+      Ok
+    </button>
+  </div>
+</form>

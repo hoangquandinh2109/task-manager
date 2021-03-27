@@ -21,5 +21,11 @@ export class TicketService {
   public getTickets(): Observable<any[]> {
     return this.httpClient.get<any[]>(this.api.ticketURL());
   }
+  public addTicket(ticket: any): Observable<any> {
+    return this.httpClient.post<any>(this.api.ticketURL(), ticket);
+  }
+  public updateTicket(ticket: any): Observable<any> {
+    return this.httpClient.put<any>(this.api.ticketURL(), { ticket });
+  }
 
 }

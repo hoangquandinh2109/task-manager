@@ -1,9 +1,9 @@
 <div *ngIf="contextMenuIsOpen" class="card-container context-menu"
   [style.top.px]="contextMenuPosition.y"
   [style.left.px]="contextMenuPosition.x">
-  <div class="card card-small" (click)="markTodo()"><span>To do</span></div>
-  <div class="card card-small info" (click)="markInProgress()"><span>Inprogress</span></div>
-  <div class="card card-small warning" (click)="markAsPending()"><span>Pending</span></div>
-  <div class="card card-small success" (click)="markDone()"><span>Done</span></div>
-  <div class="card card-small danger" (click)="highlight()"><span>Highlight</span></div>
+  <div *ngIf="markTodo.isSet" class="card card-small" (click)="markTodo.fn()"><span>To do</span></div>
+  <div *ngIf="markInProgress.isSet" class="card card-small info" (click)="markInProgress.fn()"><span>Inprogress</span></div>
+  <div *ngIf="markAsPending.isSet" class="card card-small warning" (click)="markAsPending.fn()"><span>Pending</span></div>
+  <div *ngIf="markDone.isSet" class="card card-small success" (click)="markDone.fn()"><span>Done</span></div>
+  <div *ngIf="highlight.isSet" class="card card-small danger" (click)="highlight.fn()"><span>Highlight</span></div>
 </div>

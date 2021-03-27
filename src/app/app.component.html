@@ -6,24 +6,23 @@
   />
   <span>Task</span>
 </div>
-<div>
-  <div class="content" [style.paddingBottom.px]="terminal.offsetHeight">
-    <div class="card-container">
-      <ng-container *ngFor="let ticket of ticketsList">
-        <app-ticket [ticket]="ticket"></app-ticket>
-      </ng-container>
-    </div>
+<div class="content" [style.paddingBottom.px]="terminal.offsetHeight">
+  <div class="card-container">
+    <ng-container *ngFor="let ticket of ticketsList">
+      <app-ticket [ticket]="ticket"></app-ticket>
+    </ng-container>
   </div>
-  <div class="terminal" [class.close]="terminalClose" #terminal>
-    <div class="buttons">
-      <span class="material-icons resizing"
-        (click)="toggleTerminal()"
-        [title]="terminalClose ? 'expand' : 'minimize'">{{
-          terminalClose ? 'add_circle_outline' : 'remove_circle_outline'}}
-      </span>
-      <span (click)="applyContent()" class="material-icons">done</span>
-    </div>
-    <pre #inputContentRef (paste)="pasteHandler($event)" contenteditable></pre>
+</div>
+<div class="terminal" [class.close]="terminalClose" #terminal>
+  <div class="buttons">
+    <span
+      class="material-icons resizing"
+      (click)="toggleTerminal()"
+      [title]="terminalClose ? 'expand' : 'minimize'"
+      >{{ terminalClose ? "add_circle_outline" : "remove_circle_outline" }}
+    </span>
+    <span (click)="applyContent()" class="material-icons">done</span>
   </div>
+  <pre #inputContentRef (paste)="pasteHandler($event)" contenteditable></pre>
 </div>
 <app-context-menu></app-context-menu>
