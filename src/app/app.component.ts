@@ -53,7 +53,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public applyContent(): void {
     const text: any = this.inputContentRef.nativeElement.innerText;
-    const regex = /SSWA-\d{1,}/g;
+    const regex = /PALCMS-\d{1,}/g;
     const todoList = [...text.matchAll(regex)].map((m) => m[0]);
     todoList.length ? localStorage.setItem('todoList', JSON.stringify(todoList)) : localStorage.removeItem('todoList');
     this.filtTicket(todoList);
